@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Results</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+        .results-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .doctor-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .doctor-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Doctor Search Results</h1>
+    </div>
+
+    <div class="results-container" id="results"></div>
+
+    <script>
+        const doctors = [
+            { name: "Dr. John Doe", mobile: "123-456-7890", type: "General Practitioner", location: "New York", image: "g1.jpg" },
+            { name: "Dr. Jane Smith", mobile: "987-654-3210", type: "General Practitioner", location: "Los Angeles", image: "g2.jpg" },
+            { name: "Dr. Emily Johnson", mobile: "555-555-5555", type: "General Practitioner", location: "New York", image: "g3.jpg" },
+            { name: "Dr. Michael Brown", mobile: "111-222-3333", type: "General Practitioner", location: "Chicago", image: "g4.jpg" },
+            { name: "Dr. Sarah Davis", mobile: "444-555-6666", type: "General Practitioner", location: "Houston", image: "g5.jpg" },
+            { name: "Dr. David Wilson", mobile: "777-888-9999", type: "General Practitioner", location: "Phoenix", image: "g6.jpg" },
+            { name: "Dr. Laura Martinez", mobile: "000-111-2222", type: "General Practitioner", location: "Philadelphia", image: "g7.jpg" },
+            { name: "Dr. James Garcia", mobile: "333-444-5555", type: "General Practitioner", location: "San Antonio", image: "g8.jpg" },
+            { name: "Dr. Patricia Rodriguez", mobile: "666-777-8888", type: "General Practitioner", location: "San Diego", image: "g9.jpg" },
+            { name: "Dr. Robert Lee", mobile: "999-000-1111", type: "General Practitioner", location: "Dallas", image: "g10.jpg" },
+
+            { name: "Dr. John Doe", mobile: "123-456-7890", type: "Pediatrician", location: "New York", image: "g1.jpg" },
+            { name: "Dr. Jane Smith", mobile: "987-654-3210", type: "Pediatrician", location: "Los Angeles", image: "g2.jpg" },
+            { name: "Dr. Emily Johnson", mobile: "555-555-5555", type: "Pediatrician", location: "New York", image: "g3.jpg" },
+            { name: "Dr. Michael Brown", mobile: "111-222-3333", type: "Pediatrician", location: "Chicago", image: "g4.jpg" },
+            { name: "Dr. Sarah Davis", mobile: "444-555-6666", type: "Pediatrician", location: "Houston", image: "g5.jpg" },
+            { name: "Dr. David Wilson", mobile: "777-888-9999", type: "Pediatrician", location: "Phoenix", image: "g6.jpg" },
+            { name: "Dr. Laura Martinez", mobile: "000-111-2222", type: "Pediatrician", location: "Philadelphia", image: "g7.jpg" },
+            { name: "Dr. James Garcia", mobile: "333-444-5555", type: "Pediatrician", location: "San Antonio", image: "g8.jpg" },
+            { name: "Dr. Patricia Rodriguez", mobile: "666-777-8888", type: "Pediatrician", location: "San Diego", image: "g9.jpg" },
+            { name: "Dr. Robert Lee", mobile: "999-000-1111", type: "Pediatrician", location: "Dallas", image: "g10.jpg" },
+        ];
+
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                location: params.get('location'),
+                type: params.get('type')
+            };
+        }
+
+        function displayResults() {
+            const { location, type } = getQueryParams();
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            const filteredDoctors = doctors.filter(doctor => 
+                (doctor.type === type || type === "general") && 
+                (doctor.location.toLowerCase() === location.toLowerCase() || location === "")
+            );
+
+            if (filteredDoctors.length > 0) {
+                filteredDoctors.forEach(doctor => {
+                    const doctorCard = document.createElement('div');
+                    doctorCard.className = 'doctor-card';
+                    doctorCard.innerHTML = `
+                        <img src="${doctor.image}" alt="${doctor.name}">
+                        <h3>${doctor.name}</h3>
+                        <p>Type: ${doctor.type}</p>
+                        <p>Mobile: ${doctor.mobile}</p>
+                        <p>Location: ${doctor.location}</p>
+                    `;
+                    resultsContainer.appendChild(doctorCard);
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>No doctors found for the selected criteria.</p>';
+            }
+        }
+
+        window.onload = displayResults;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Doctors</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .search-input, .doctor-type {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        .search-button {
+            padding: 10px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .results-container {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .doctor-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .doctor-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Find Doctors</h1>
+        <p>Search for doctors by location and specialty.</p>
+    </div>
+
+    <div class="search-container">
+        <select class="search-input" id="location-select">
+            <option value="">Select a location...</option>
+            <option value="New York">New York</option>
+            <option value="Los Angeles">Los Angeles</option>
+            <option value="Chicago">Chicago</option>
+            <option value="Houston">Houston</option>
+            <option value="Phoenix">Phoenix</option>
+            <option value="Philadelphia">Philadelphia</option>
+            <option value="San Antonio">San Antonio</option>
+            <option value="San Diego">San Diego</option>
+            <option value="Dallas">Dallas</option>
+            <option value="Austin">Austin</option>
+        </select>
+
+        <select id="doctor-type" class="doctor-type">
+            <option value="general">General Practitioner</option>
+            <option value="pediatrician">Pediatrician</option>
+            <option value="dermatologist">Dermatologist</option>
+            <option value="orthopedist">Orthopedist</option>
+            <option value="gynecologist">Gynecologist</option>
+            <option value="cardiologist">Cardiologist</option>
+            <option value="dentist">Dentist</option>
+            <option value="psychiatrist">Psychiatrist</option>
+        </select>
+        <button class="search-button" onclick="redirectToResults()">Search</button>
+
+    </div>
+
+    <div class="results-container" id="results"></div>
+
+    <script>
+        const doctors = [
+            { name: "Dr. John Doe", mobile: "123-456-7890", type: "General Practitioner", location: "New York", image: "doctor1.jpg" },
+            { name: "Dr. Jane Smith", mobile: "987-654-3210", type: "Pediatrician", location: "Los Angeles", image: "doctor2.jpg" },
+            { name: "Dr. Emily Johnson", mobile: "555-555-5555", type: "Dermatologist", location: "New York", image: "doctor3.jpg" },
+            { name: "Dr. Michael Brown", mobile: "111-222-3333", type: "Orthopedist", location: "Chicago", image: "doctor4.jpg" },
+            { name: "Dr. Sarah Davis", mobile: "444-555-6666", type: "Gynecologist", location: "Houston", image: "doctor5.jpg" },
+            { name: "Dr. David Wilson", mobile: "777-888-9999", type: "Cardiologist", location: "Phoenix", image: "doctor6.jpg" },
+            { name: "Dr. Laura Martinez", mobile: "000-111-2222", type: "Dentist", location: "Philadelphia", image: "doctor7.jpg" },
+            { name: "Dr. James Garcia", mobile: "333-444-5555", type: "Psychiatrist", location: "San Antonio", image: "doctor8.jpg" },
+            { name: "Dr. Patricia Rodriguez", mobile: "666-777-8888", type: "Pediatrician", location: "San Diego", image: "doctor9.jpg" },
+            { name: "Dr. Robert Lee", mobile: "999-000-1111", type: "General Practitioner", location: "Dallas", image: "doctor10.jpg" },
+
+            { name: "Dr. Michael Brown", mobile: "111-222-3333", type: "Orthopedist", location: "Chicago", image: "doctor4.jpg" },
+            { name: "Dr. Sarah Davis", mobile: "444-555-6666", type: "Gynecologist", location: "Houston", image: "doctor5.jpg" },
+            { name: "Dr. John William ", mobile: "777-888-9999", type: "Cardiologist", location: "Phoenix", image: "doctor6.jpg" },
+            { name: "Dr. Laura Martinez", mobile: "000-111-2222", type: "Dentist", location: "Philadelphia", image: "doctor7.jpg" },
+            { name: "Dr. James Garcia", mobile: "333-444-5555", type: "Psychiatrist", location: "San Antonio", image: "doctor8.jpg" },
+            { name: "Dr. Patricia Rodriguez", mobile: "666-777-8888", type: "Pediatrician", location: "San Diego", image: "doctor9.jpg" },
+            { name: "Dr. Robert Lee", mobile: "999-000-1111", type: "General Practitioner", location: "Dallas", image: "doctor10.jpg" },
+
+            // Add more mock doctor data as needed
+        ];
+
+function redirectToResults() {
+    const location = document.querySelector('#location-select').value;
+
+    const type = document.getElementById('doctor-type').value;
+    const resultsPage = `doctor_results.html?location=${encodeURIComponent(location)}&type=${encodeURIComponent(type)}`;
+    window.location.href = resultsPage;
+}
+
+    </script>
+
+</body>
+</html>

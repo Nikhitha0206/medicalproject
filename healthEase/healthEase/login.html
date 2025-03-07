@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthEase Portal</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: black;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Main Container */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        /* Cards */
+        .card {
+            width: 220px;
+            height: 280px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Circular Image Container */
+        .image-container {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid black;
+            margin: 15px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0e0e0;
+            position: relative;
+        }
+
+        /* Placeholder Image */
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* Card Text */
+        .card-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        /* Login Link - Positioned at the Bottom */
+        .login-link {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #0077cc;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Login / Registration Form */
+        .form-container {
+            display: none; /* Initially hidden */
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0077cc;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .toggle-link a {
+            color: #0077cc;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="nav-title">HealthEase</div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container" id="card-container">
+        <!-- Patient Card -->
+        <div class="card" id="patient-card">
+            <div class="image-container">
+                <img src="user.png" alt="Patient">
+            </div>
+            <p class="card-text">Patient</p>
+            <a href="./index1.html" class="login-link" onclick="showLoginForm()">Login or register</a>
+        </div>
+
+        <!-- Doctor Card -->
+        <div class="card" id="doctor-card">
+            <div class="image-container">
+                <img src="doctor.png" alt="Doctor">
+            </div>
+            <p class="card-text">Doctor</p>
+            <a href="#" class="login-link" onclick="showLoginForm()">Login or register</a>
+        </div>
+
+        <!-- Hospital Card -->
+        <div class="card" id="hospital-card">
+            <div class="image-container">
+                <img src="hospital.jpg" alt="Hospital">
+            </div>
+            <p class="card-text">Hospital</p>
+            <a href="#" class="login-link" onclick="showLoginForm()">Login or register</a>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container" id="login-form">
+        <h2>Patient Login</h2>
+        <label>Mobile Number / Email ID</label>
+        <input type="text" id="login-email" placeholder="Enter Mobile Number or Email">
+        <label>Password</label>
+        <input type="password" id="login-password" placeholder="Enter Password">
+        <button onclick="login()">Login</button>
+        <p id="login-message"></p>
+        <p class="toggle-link">Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="form-container" id="register-form">
+        <h2>User Registration</h2>
+        <label>Full Name</label>
+        <input type="text" id="full-name" placeholder="Enter Full Name">
+        <label>Mobile Number</label>
+        <select id="country-code">
+            <option>+91 (IND)</option>
+            <option>+1 (USA)</option>
+            <option>+44 (UK)</option>
+        </select>
+        <input type="text" id="mobile-number" placeholder="Enter Mobile Number">
+        <label>Create Password</label>
+        <input type="password" id="register-password" placeholder="Create Password">
+        <button onclick="register()">Register</button>
+        <p id="register-message"></p>
+        <p class="toggle-link">Already have an account? <a href="#" onclick="showLoginForm()">Login</a></p>
+    </div>
+
+    <script>
+        function showLoginForm() {
+            document.getElementById("card-container").style.display = "none";
+            document.getElementById("login-form").style.display = "block";
+        }
+
+        function showRegisterForm() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "block";
+        }
+
+        function register() {
+            let fullName = document.getElementById("full-name").value;
+            let mobileNumber = document.getElementById("mobile-number").value;
+            let password = document.getElementById("register-password").value;
+
+            if (fullName === "" || mobileNumber === "" || password === "") {
+                document.getElementById("register-message").innerText = "All fields are required!";
+                return;
+            }
+
+            localStorage.setItem("mobileNumber", mobileNumber);
+            localStorage.setItem("password", password);
+
+            document.getElementById("register-message").innerText = "Successfully Registered!";
+            document.getElementById("register-message").style.color = "green";
+        }
+
+        function login() {
+            let loginEmail = document.getElementById("login-email").value;
+            let loginPassword = document.getElementById("login-password").value;
+
+            let storedMobile = localStorage.getItem("mobileNumber");
+            let storedPassword = localStorage.getItem("password");
+
+            if (loginEmail === storedMobile && loginPassword === storedPassword) {
+                document.getElementById("login-message").innerText = "Login Successful!";
+                document.getElementById("login-message").style.color = "green";
+                setTimeout(() => { window.location.href = "dashboard.html"; }, 1500);
+            } else {
+                document.getElementById("login-message").innerText = "Invalid Credentials!";
+                document.getElementById("login-message").style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>

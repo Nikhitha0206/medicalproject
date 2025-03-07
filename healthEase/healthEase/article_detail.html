@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Detail</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .article-detail {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .article-detail img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .article-detail h1 {
+            font-size: 24px;
+            color: #222;
+        }
+        .article-detail p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="article-detail">
+        <img id="article-image" src="" alt="Article Image">
+        <h1 id="article-title"></h1>
+        <p id="article-content">This is the full content of the article.</p>
+
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Get article details from URL parameters
+        const title = getUrlParameter('title');
+        const content = getUrlParameter('content');
+        const image = getUrlParameter('image');
+
+        // Set article details in the HTML
+        document.getElementById('article-title').innerText = title;
+        document.getElementById('article-content').innerText = content;
+        document.getElementById('article-image').src = image;
+    </script>
+
+</body>
+</html>
